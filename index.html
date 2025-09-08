@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hava Durumu Uygulaması</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Dinamik Arka Plan -->
+    <div id="background-container" class="background-container"></div>
+    
+    <!-- Ana Container -->
+    <div class="main-container">
+        <!-- Başlık ve Arama -->
+        <header class="header">
+            <h1 class="app-title">
+                <i class="fas fa-cloud-sun"></i>
+                Hava Durumu
+            </h1>
+            <div class="search-container">
+                <input type="text" id="cityInput" placeholder="Şehir adını girin..." class="search-input">
+                <button id="searchBtn" class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Hava Durumu Kartı -->
+        <main class="weather-card">
+            <div id="loadingSpinner" class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Yükleniyor...</p>
+            </div>
+
+            <div id="weatherContent" class="weather-content" style="display: none;">
+                <!-- Şehir Bilgisi -->
+                <div class="city-info">
+                    <h2 id="cityName" class="city-name">İstanbul</h2>
+                    <p id="countryName" class="country-name">Türkiye</p>
+                    <p id="currentDate" class="current-date"></p>
+                </div>
+
+                <!-- Ana Hava Durumu -->
+                <div class="main-weather">
+                    <div class="temperature-section">
+                        <span id="temperature" class="temperature">22°</span>
+                        <div class="weather-desc">
+                            <i id="weatherIcon" class="weather-icon fas fa-sun"></i>
+                            <p id="weatherDescription" class="weather-description">Güneşli</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detaylar -->
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <i class="fas fa-eye"></i>
+                        <span>Görüş</span>
+                        <span id="visibility">10 km</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tint"></i>
+                        <span>Nem</span>
+                        <span id="humidity">65%</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <span>Rüzgar</span>
+                        <span id="windSpeed">15 km/h</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Hissedilen</span>
+                        <span id="feelsLike">25°C</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-compress-arrows-alt"></i>
+                        <span>Basınç</span>
+                        <span id="pressure">1013 hPa</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-sun"></i>
+                        <span>UV İndeksi</span>
+                        <span id="uvIndex">6</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Chatbot Bölümü -->
+        <section class="chatbot-section">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Hava Durumu Asistanı</h3>
+                <p>Size özel öneriler almak için bir soru seçin:</p>
+            </div>
+            
+            <div class="chatbot-questions">
+                <button class="question-btn" data-question="Bugün ne giymeliyim?">
+                    <i class="fas fa-tshirt"></i>
+                    Bugün ne giymeliyim?
+                </button>
+                <button class="question-btn" data-question="Şemsiye almalı mıyım?">
+                    <i class="fas fa-umbrella"></i>
+                    Şemsiye almalı mıyım?
+                </button>
+                <button class="question-btn" data-question="Sürüş koşulları nasıl?">
+                    <i class="fas fa-car"></i>
+                    Sürüş koşulları nasıl?
+                </button>
+                <button class="question-btn" data-question="Spor yapmak için uygun mu?">
+                    <i class="fas fa-running"></i>
+                    Spor yapmak için uygun mu?
+                </button>
+                <button class="question-btn" data-question="Akşam hava soğur mu?">
+                    <i class="fas fa-moon"></i>
+                    Akşam hava soğur mu?
+                </button>
+            </div>
+
+            <div id="chatbotResponse" class="chatbot-response" style="display: none;">
+                <div class="response-content">
+                    <i class="fas fa-comment-dots"></i>
+                    <p id="responseText"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Hata Modal -->
+    <div id="errorModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Hata!</h3>
+            <p id="errorMessage">Bir hata oluştu.</p>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="weatherAPI.js"></script>
+    <script src="backgroundManager.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
