@@ -1,6 +1,7 @@
 /**
  * Hava Durumu API Yöneticisi
  * OpenWeatherMap API ile iletişim kurar ve verileri işler
+ * Ülke kodu bilgisini de döndürür
  */
 
 class WeatherAPI {
@@ -32,7 +33,8 @@ class WeatherAPI {
                 lat: data[0].lat,
                 lon: data[0].lon,
                 name: data[0].local_names?.tr || data[0].name,
-                country: data[0].country
+                country: data[0].country,
+                countryCode: data[0].country // Ülke kodunu ekledik
             };
         } catch (error) {
             console.error('Koordinat alımında hata:', error);
@@ -64,6 +66,8 @@ class WeatherAPI {
         try {
             // Önce koordinatları al
             const coordinates = await this.getCoordinates(cityName);
+            
+            console.log(`🌍 Şehir bilgisi: ${coordinates.name}, ${coordinates.country} (${coordinates.countryCode})`);
             
             // Sonra hava durumu verilerini al
             const weatherUrl = `${CONFIG.WEATHER_API.BASE_URL}?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${CONFIG.WEATHER_API.KEY}&units=${CONFIG.WEATHER_API.DEFAULT_UNITS}&lang=${CONFIG.WEATHER_API.DEFAULT_LANG}`;
@@ -101,6 +105,7 @@ class WeatherAPI {
             city: {
                 name: coordinates.name,
                 country: this.getCountryName(coordinates.country),
+                countryCode: coordinates.countryCode, // Ülke kodunu ekledik
                 coordinates: {
                     lat: coordinates.lat,
                     lon: coordinates.lon
@@ -155,7 +160,61 @@ class WeatherAPI {
             'CA': 'Kanada',
             'BR': 'Brezilya',
             'MX': 'Meksika',
-            'AR': 'Arjantin'
+            'AR': 'Arjantin',
+            'NL': 'Hollanda',
+            'BE': 'Belçika',
+            'CH': 'İsviçre',
+            'AT': 'Avusturya',
+            'SE': 'İsveç',
+            'NO': 'Norveç',
+            'DK': 'Danimarka',
+            'FI': 'Finlandiya',
+            'PL': 'Polonya',
+            'CZ': 'Çek Cumhuriyeti',
+            'HU': 'Macaristan',
+            'PT': 'Portekiz',
+            'IE': 'İrlanda',
+            'IL': 'İsrail',
+            'KR': 'Güney Kore',
+            'TH': 'Tayland',
+            'SG': 'Singapur',
+            'MY': 'Malezya',
+            'PH': 'Filipinler',
+            'VN': 'Vietnam',
+            'ID': 'Endonezya',
+            'ZA': 'Güney Afrika',
+            'MA': 'Fas',
+            'DZ': 'Cezayir',
+            'TN': 'Tunus',
+            'LY': 'Libya',
+            'SD': 'Sudan',
+            'ET': 'Etiyopya',
+            'KE': 'Kenya',
+            'TZ': 'Tanzanya',
+            'UG': 'Uganda',
+            'GH': 'Gana',
+            'NG': 'Nijerya',
+            'CI': "Fildişi Sahili",
+            'SN': 'Senegal',
+            'ML': 'Mali',
+            'BF': 'Burkina Faso',
+            'NE': 'Nijer',
+            'TD': 'Çad',
+            'CF': 'Orta Afrika Cumhuriyeti',
+            'CM': 'Kamerun',
+            'GA': 'Gabon',
+            'CG': 'Kongo',
+            'CD': 'Demokratik Kongo Cumhuriyeti',
+            'AO': 'Angola',
+            'ZM': 'Zambiya',
+            'ZW': 'Zimbabve',
+            'BW': 'Botsvana',
+            'NA': 'Namibya',
+            'MW': 'Malavi',
+            'MZ': 'Mozambik',
+            'MG': 'Madagaskar',
+            'MU': 'Mauritius',
+            'SC': 'Seyşeller'
         };
         return countries[countryCode] || countryCode;
     }
@@ -191,7 +250,7 @@ class WeatherAPI {
      */
     clearCache() {
         this.cache.clear();
-        console.log('🗑️ Cache temizlendi');
+        console.log('🗑️ Weather API cache temizlendi');
     }
 
     /**

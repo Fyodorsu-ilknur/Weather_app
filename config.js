@@ -1,62 +1,192 @@
 // API Konfigürasyonu
 const CONFIG = {
-    // OpenWeatherMap API - Ücretsiz hesap oluşturup kendi API key'inizi buraya girin
+    // OpenWeatherMap API
     WEATHER_API: {
         KEY: '9ade89c8cc190509a07210e8a2dc667e',
         BASE_URL: 'https://api.openweathermap.org/data/2.5/weather',
         FORECAST_URL: 'https://api.openweathermap.org/data/2.5/forecast',
-        DEFAULT_UNITS: 'metric', // metric = Celsius, imperial = Fahrenheit
-        DEFAULT_LANG: 'tr' // Türkçe açıklamalar için
+        DEFAULT_UNITS: 'metric',
+        DEFAULT_LANG: 'tr'
     },
     
-    // Unsplash API - Şehir fotoğrafları için (opsiyonel)
+    // Unsplash API - Türkiye dışı şehirler için
     UNSPLASH_API: {
-        KEY: 'UpjvxfHUHhQLSgjV8022HEwRDJ15q8WYF0mIqldy4oU', // https://unsplash.com/developers adresinden alabilirsiniz
+        KEY: 'UpjvxfHUHhQLSgjV8022HEwRDJ15q8WYF0mIqldy4oU',
         BASE_URL: 'https://api.unsplash.com/search/photos',
         DEFAULT_QUERY: 'city skyline landscape',
         PER_PAGE: 5,
-        ORIENTATION: 'portrait' // Dikey fotoğraflar için
+        ORIENTATION: 'landscape'
     },
     
-    // Varsayılan şehir resimleri (Unsplash API olmadığında kullanılacak)
-   /* DEFAULT_CITY_IMAGES: {
-        'istanbul': 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'ankara': 'https://images.unsplash.com/photo-1582467906653-d59c57ddd0c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'izmir': 'https://images.unsplash.com/photo-1598555834355-a2e7bb7e0c7c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'antalya': 'https://images.unsplash.com/photo-1566737236500-c8ac43014a8a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'bursa': 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'adana': 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'gaziantep': 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-        'default': 'https://images.unsplash.com/photo-1519904981063-b0cf448d479e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80'
-    }, */
+    // Türkiye şehirleri için yerel resimler
+    TURKEY_CITY_IMAGES: {
+        // A
+        'adana': 'images/adana.png',
+        'adiyaman': 'images/adiyaman.png',
+        'afyon': 'images/afyon.png',
+        'agri': 'images/agri.png',
+        'aksaray': 'images/aksaray.png',
+        'amasya': 'images/amasya.png',
+        'ankara': 'images/ankara.png',
+        'antalya': 'images/antalya.png',
+        'ardahan': 'images/ardahan.png',
+        'artvin': 'images/artvin.png',
+        'aydin': 'images/aydin.png',
+        
+        // B
+        'balikesir': 'images/balikesir.png',
+        'bartin': 'images/bartin.png',
+        'batman': 'images/batman.png',
+        'bayburt': 'images/bayburt.png',
+        'bilecik': 'images/bilecik.png',
+        'bingol': 'images/bingol.png',
+        'bitlis': 'images/bitlis.png',
+        'bolu': 'images/bolu.png',
+        'burdur': 'images/burdur.png',
+        'bursa': 'images/bursa.png',
+        
+        // C
+        'canakkale': 'images/canakkale.png',
+        'cankiri': 'images/cankiri.png',
+        'corum': 'images/corum.png',
+        
+        // D
+        'denizli': 'images/denizli.png',
+        'diyarbakir': 'images/diyarbakir.png',
+        'duzce': 'images/duzce.png',
+        
+        // E
+        'edirne': 'images/edirne.png',
+        'elazig': 'images/elazig.png',
+        'erzincan': 'images/erzincan.png',
+        'erzurum': 'images/erzurum.png',
+        'eskisehir': 'images/eskisehir.png',
+        
+        // G
+        'gaziantep': 'images/gaziantep.png',
+        'giresun': 'images/giresun.png',
+        'gumushane': 'images/gumushane.png',
+        
+        // H
+        'hakkari': 'images/hakkari.png',
+        'hatay': 'images/hatay.png',
+        
+        // I
+        'igdir': 'images/igdir.png',
+        'isparta': 'images/isparta.png',
+        'istanbul': 'images/istanbul.png',
+        'izmir': 'images/izmir.png',
+        
+        // K
+        'karabuk': 'images/karabuk.png',
+        'karaman': 'images/karaman.png',
+        'kars': 'images/kars.png',
+        'kastamonu': 'images/kastamonu.png',
+        'kayseri': 'images/kayseri.png',
+        'kilis': 'images/kilis.png',
+        'kirikkale': 'images/kirikkale.png',
+        'kirklarel': 'images/kirklareli.png',
+        'kirsehir': 'images/kirsehir.png',
+        'kocaeli': 'images/kocaeli.jpg',
+        'konya': 'images/konya.png',
+        'kutahya': 'images/kutahya.png',
+        
+        // M
+        'malatya': 'images/malatya.png',
+        'manisa': 'images/manisa.png',
+        'maras': 'images/maras.png',
+        'mardin': 'images/mardin.png',
+        'mersin': 'images/mersin.png',
+        'mugla': 'images/mugla.png',
+        'mus': 'images/mus.png',
+        
+        // N
+        'nevsehir': 'images/nevsehir.png',
+        'nigde': 'images/nigde.png',
+        
+        // O
+        'ordu': 'images/ordu.png',
+        'osmaniye': 'images/osmaniye.png',
+        
+        // R
+        'rize': 'images/rize.png',
+        
+        // S
+        'sakarya': 'images/sakarya.png',
+        'samsun': 'images/samsun.png',
+        'sanliurfa': 'images/sanliurfa.png',
+        'siirt': 'images/siirt.png',
+        'sinop': 'images/sinop.png',
+        'sirnak': 'images/sirnak.png',
+        'sivas': 'images/sivas.png',
+        
+        // T
+        'tekirdag': 'images/tekirdag.png',
+        'tokat': 'images/tokat.png',
+        'trabzon': 'images/trabzon.png',
+        'tunceli': 'images/tunceli.png',
+        
+        // U
+        'usak': 'images/usak.png',
+        
+        // V
+        'van': 'images/van.png',
+        
+        // Y
+        'yalova': 'images/yalova.png',
+        'yozgat': 'images/yozgat.png',
+        
+        // Z
+        'zonguldak': 'images/zonguldak.png'
+    },
+    
+    // Türkiye şehir isimleri (normalizasyon için)
+    TURKEY_CITIES: [
+        'adana', 'adiyaman', 'afyonkarahisar', 'afyon', 'agri', 'aksaray', 'amasya', 
+        'ankara', 'antalya', 'ardahan', 'artvin', 'aydin', 'balikesir', 'bartin', 
+        'batman', 'bayburt', 'bilecik', 'bingol', 'bitlis', 'bolu', 'burdur', 'bursa',
+        'canakkale', 'cankiri', 'corum', 'denizli', 'diyarbakir', 'duzce', 'edirne',
+        'elazig', 'erzincan', 'erzurum', 'eskisehir', 'gaziantep', 'giresun', 'gumushane',
+        'hakkari', 'hatay', 'igdir', 'isparta', 'istanbul', 'izmir', 'karabuk', 'karaman',
+        'kars', 'kastamonu', 'kayseri', 'kilis', 'kirikkale', 'kirklareli', 'kirsehir',
+        'kocaeli', 'konya', 'kutahya', 'malatya', 'manisa', 'kahramanmaras', 'maras',
+        'mardin', 'mersin', 'mugla', 'mus', 'nevsehir', 'nigde', 'ordu', 'osmaniye',
+        'rize', 'sakarya', 'samsun', 'sanliurfa', 'siirt', 'sinop', 'sirnak', 'sivas',
+        'tekirdag', 'tokat', 'trabzon', 'tunceli', 'usak', 'van', 'yalova', 'yozgat',
+        'zonguldak'
+    ],
+    
+    // Varsayılan resim
+    DEFAULT_IMAGE: 'images/default.jpg',
     
     // Hava durumu ikonları
     WEATHER_ICONS: {
-        '01d': 'fas fa-sun', // açık gündüz
-        '01n': 'fas fa-moon', // açık gece
-        '02d': 'fas fa-cloud-sun', // parçalı bulutlu gündüz
-        '02n': 'fas fa-cloud-moon', // parçalı bulutlu gece
-        '03d': 'fas fa-cloud', // scattered clouds
+        '01d': 'fas fa-sun',
+        '01n': 'fas fa-moon',
+        '02d': 'fas fa-cloud-sun',
+        '02n': 'fas fa-cloud-moon',
+        '03d': 'fas fa-cloud',
         '03n': 'fas fa-cloud',
-        '04d': 'fas fa-cloud', // broken clouds
+        '04d': 'fas fa-cloud',
         '04n': 'fas fa-cloud',
-        '09d': 'fas fa-cloud-rain', // sağanak yağmur
+        '09d': 'fas fa-cloud-rain',
         '09n': 'fas fa-cloud-rain',
-        '10d': 'fas fa-cloud-sun-rain', // yağmur gündüz
-        '10n': 'fas fa-cloud-moon-rain', // yağmur gece
-        '11d': 'fas fa-bolt', // gök gürültüsü
+        '10d': 'fas fa-cloud-sun-rain',
+        '10n': 'fas fa-cloud-moon-rain',
+        '11d': 'fas fa-bolt',
         '11n': 'fas fa-bolt',
-        '13d': 'fas fa-snowflake', // kar
+        '13d': 'fas fa-snowflake',
         '13n': 'fas fa-snowflake',
-        '50d': 'fas fa-smog', // sis
+        '50d': 'fas fa-smog',
         '50n': 'fas fa-smog'
     },
     
     // Uygulama ayarları
     APP_SETTINGS: {
         DEFAULT_CITY: 'İstanbul',
-        ANIMATION_DURATION: 1500, // milisaniye
-        CACHE_DURATION: 300000, // 5 dakika (milisaniye)
+        ANIMATION_DURATION: 2000,
+        FADE_DURATION: 1000,
+        CACHE_DURATION: 300000,
         MAX_SEARCH_RESULTS: 5
     }
 };
@@ -64,11 +194,34 @@ const CONFIG = {
 // API Key kontrolü
 function checkAPIKeys() {
     if (CONFIG.WEATHER_API.KEY === 'YOUR_OPENWEATHERMAP_API_KEY') {
-        console.warn('⚠️ OpenWeatherMap API key tanımlanmamış! Lütfen config.js dosyasında API key\'inizi tanımlayın.');
-        console.info('📘 API key almak için: https://openweathermap.org/api');
+        console.warn('⚠️ OpenWeatherMap API key tanımlanmamış!');
         return false;
     }
     return true;
+}
+
+// Türkiye şehri kontrolü
+function isTurkishCity(cityName, countryCode = '') {
+    if (countryCode && countryCode !== 'TR') {
+        return false;
+    }
+    
+    const normalized = normalizeCityName(cityName);
+    return CONFIG.TURKEY_CITIES.includes(normalized);
+}
+
+// Şehir adını normalize et
+function normalizeCityName(cityName) {
+    return cityName
+        .toLowerCase()
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/\s+/g, '') // Boşlukları kaldır
+        .replace(/[^a-z0-9]/g, ''); // Özel karakterleri kaldır
 }
 
 // Dil ayarları
@@ -90,5 +243,5 @@ const TRANSLATIONS = {
 
 // Export (ES6 modülleri için)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { CONFIG, TRANSLATIONS, checkAPIKeys };
+    module.exports = { CONFIG, TRANSLATIONS, checkAPIKeys, isTurkishCity, normalizeCityName };
 }
