@@ -246,56 +246,44 @@ class BackgroundManager {
     }
 
     /**
-     * Hava durumuna göre arka plan filtresi uygula
+     * Hava durumuna göre arka plan filtresi - BASİTLEŞTİRİLDİ
      */
     applyWeatherFilter(weatherCondition) {
-        // Mevcut sınıfları temizle
-        const weatherClasses = ['sunny', 'rainy', 'cloudy', 'night'];
-        this.backgroundContainer.classList.remove(...weatherClasses);
+        // Sadece basit filtreler - sınıf sistemi kaldırıldı
+        const filters = {
+            'Clear': 'brightness(1.05) contrast(1.1) saturate(1.1)',
+            'Rain': 'brightness(0.8) contrast(1.1) saturate(0.9)',
+            'Drizzle': 'brightness(0.85) contrast(1.0) saturate(0.95)',
+            'Thunderstorm': 'brightness(0.6) contrast(1.2) saturate(0.8)',
+            'Snow': 'brightness(1.0) contrast(0.95) saturate(0.9)',
+            'Clouds': 'brightness(0.95) contrast(1.0) saturate(0.95)',
+            'Mist': 'brightness(0.9) contrast(0.9) saturate(0.8)',
+            'Fog': 'brightness(0.85) contrast(0.85) saturate(0.7)'
+        };
 
-        // Yeni sınıfı ekle
-        switch (weatherCondition) {
-            case 'Clear':
-                this.backgroundContainer.classList.add('sunny');
-                break;
-            case 'Rain':
-            case 'Drizzle':
-            case 'Thunderstorm':
-                this.backgroundContainer.classList.add('rainy');
-                break;
-            case 'Clouds':
-                this.backgroundContainer.classList.add('cloudy');
-                break;
-            case 'Snow':
-            case 'Mist':
-            case 'Fog':
-                // Özel filtre yok, varsayılan
-                break;
-        }
-
-        console.log('🎨 Hava durumu filtresi uygulandı:', weatherCondition);
+        const filter = filters[weatherCondition] || 'none';
+        this.backgroundContainer.style.filter = filter;
+        
+        console.log('🎨 Hava durumu filtresi:', weatherCondition);
     }
 
     /**
-     * Gece/gündüz moduna göre arka plan ayarla
+     * Gece/gündüz modu - BASİTLEŞTİRİLDİ
      */
     applyTimeOfDayEffect(sunrise, sunset) {
         const now = new Date();
         const currentTime = now.getTime();
-        
-        // Mevcut gece sınıfını kaldır
-        this.backgroundContainer.classList.remove('night');
         
         if (sunrise && sunset) {
             const sunriseTime = sunrise.getTime();
             const sunsetTime = sunset.getTime();
             
             if (currentTime < sunriseTime || currentTime > sunsetTime) {
-                // Gece modu
-                this.backgroundContainer.classList.add('night');
+                // Gece modu - sadece filtre
+                const currentFilter = this.backgroundContainer.style.filter || 'none';
+                this.backgroundContainer.style.filter = currentFilter + ' brightness(0.7) hue-rotate(180deg)';
                 console.log('🌙 Gece modu aktif');
             } else {
-                // Gündüz modu
                 console.log('☀️ Gündüz modu aktif');
             }
         }
