@@ -16,7 +16,13 @@ class WeatherAPI {
      */
     async getCoordinates(cityName) {
         try {
-            const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(cityName)}&limit=1&appid=${CONFIG.WEATHER_API.KEY}`;
+          let searchQuery = cityName;
+            if (isTurkishCity(cityName)) {
+                searchQuery += ', TR';
+            }
+            // DEĞİŞİKLİK BURADA BİTİYOR
+
+            const url = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(searchQuery)}&limit=1&appid=${CONFIG.WEATHER_API.KEY}`;
             const response = await fetch(url);
             
             if (!response.ok) {
@@ -103,9 +109,9 @@ class WeatherAPI {
     processWeatherData(data, coordinates) {
         return {
             city: {
-                name: coordinates.name,
+               name: coordinates.name.replace(/\s+(il merkezi|merkez|belediyesi|ili|il)$/i, '').trim(),
                 country: this.getCountryName(coordinates.country),
-                countryCode: coordinates.countryCode, // Ülke kodunu ekledik
+                countryCode: coordinates.countryCode, 
                 coordinates: {
                     lat: coordinates.lat,
                     lon: coordinates.lon

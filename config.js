@@ -85,7 +85,7 @@ const CONFIG = {
         'kayseri': 'images/kayseri.png',
         'kilis': 'images/kilis.png',
         'kirikkale': 'images/kirikkale.png',
-        'kirklarel': 'images/kirklareli.png',
+        'kirklareli': 'images/kirklareli.png',
         'kirsehir': 'images/kirsehir.png',
         'kocaeli': 'images/kocaeli.jpg',
         'konya': 'images/konya.png',
@@ -142,20 +142,20 @@ const CONFIG = {
     
     // Türkiye şehir isimleri (normalizasyon için)
     TURKEY_CITIES: [
-        'adana', 'adiyaman', 'afyonkarahisar', 'afyon', 'agri', 'aksaray', 'amasya', 
+        'adana', 'adiyaman', 'afyon', 'agri', 'aksaray', 'amasya', 
         'ankara', 'antalya', 'ardahan', 'artvin', 'aydin', 'balikesir', 'bartin', 
         'batman', 'bayburt', 'bilecik', 'bingol', 'bitlis', 'bolu', 'burdur', 'bursa',
         'canakkale', 'cankiri', 'corum', 'denizli', 'diyarbakir', 'duzce', 'edirne',
         'elazig', 'erzincan', 'erzurum', 'eskisehir', 'gaziantep', 'giresun', 'gumushane',
         'hakkari', 'hatay', 'igdir', 'isparta', 'istanbul', 'izmir', 'karabuk', 'karaman',
         'kars', 'kastamonu', 'kayseri', 'kilis', 'kirikkale', 'kirklareli', 'kirsehir',
-        'kocaeli', 'konya', 'kutahya', 'malatya', 'manisa', 'kahramanmaras', 'maras',
+        'kocaeli', 'konya', 'kutahya', 'malatya', 'manisa','maras',
         'mardin', 'mersin', 'mugla', 'mus', 'nevsehir', 'nigde', 'ordu', 'osmaniye',
         'rize', 'sakarya', 'samsun', 'sanliurfa', 'siirt', 'sinop', 'sirnak', 'sivas',
         'tekirdag', 'tokat', 'trabzon', 'tunceli', 'usak', 'van', 'yalova', 'yozgat',
         'zonguldak'
     ],
-    
+      
     // Varsayılan resim
     DEFAULT_IMAGE: 'images/default.jpg',
     
@@ -220,8 +220,9 @@ function normalizeCityName(cityName) {
         .replace(/ı/g, 'i')
         .replace(/ö/g, 'o')
         .replace(/ç/g, 'c')
-        .replace(/\s+/g, '') // Boşlukları kaldır
-        .replace(/[^a-z0-9]/g, ''); // Özel karakterleri kaldır
+        .replace(/â/g, 'a') // YENİ EKLENEN SATIR: Şapkalı 'a' harfini düzeltir.
+        .replace(/\s+/g, '') 
+        .replace(/[^a-z0-9]/g, '');
 }
 
 // Dil ayarları
